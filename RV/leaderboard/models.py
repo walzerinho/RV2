@@ -1,7 +1,7 @@
 from django.db import models
 
 class Leaderboard(models.Model):
-    username = models.Li(max_length=100)
+    username = models.CharField(max_length=100)
     score = models.IntegerField(default=0)
 
     def __str__(self):

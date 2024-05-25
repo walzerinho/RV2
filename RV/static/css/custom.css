@@ -1,0 +1,23 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main_nav {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+a {
+  text-decoration: inherit;
+  color: red;
+}
+
+li {
+  padding: 0 15px;
+}
+
+body {
+  margin: 0;
+}
