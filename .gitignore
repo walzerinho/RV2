@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# db
+RV/db.sqlite3
+RV2
+
+# Secrets
+
+CONF/
 # Distribution / packaging
 .Python
 build/
