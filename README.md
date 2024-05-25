@@ -40,7 +40,3 @@ python manage.py runserver
 # Tournament creation
 
 From the home page, you can create a tournament
-
-```
-
-```
