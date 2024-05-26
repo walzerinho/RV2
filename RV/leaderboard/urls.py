@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import leaderboard_view
+from .views import leaderboard_view, home_view
 
 urlpatterns = [
-    path('', leaderboard_view, name='leaderboard'),
+    path('', home_view, name='home'),
+    path('leaderboard', leaderboard_view, name='leaderboard'),
     # Autres URLs de votre application...
 ]
