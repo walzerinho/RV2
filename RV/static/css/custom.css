@@ -3,11 +3,13 @@
   src: url("fonts/MajorMonoDisplay-Regular.ttf") format("truetype");
 }
 
+html {
+    font-family: "Major";
+}
 .home_title {
   width: 100%;
   display: flex;
   justify-content: center;
-  font-family: "Major";
   font-size: 4em;
 }
 .home_container {
@@ -24,6 +26,64 @@ main {
   margin: auto;
   width: 33%;
   border-radius: 5px;
-  font-family: "Major";
   font-size: 2.7em;
+}
+
+.create_form {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+
+/* TEST */
+
+
+.games{
+  display: flex;  
+  flex-wrap: wrap;
+  gap: 1em;
+  border: solid purple;
+  padding: 1em;
+  margin-bottom: 1em;
+  
+  counter-reset: item;
+}
+
+.games .type{
+  width: 50%;
+  height: 2rem;
+}
+
+.games .items{  
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.item{
+  position: relative;
+  margin-bottom: 1em;
+  border: solid 1px darkgray;  
+  padding: 1em;
+}
+
+.item::before {
+  counter-increment: item; 
+  position: absolute;
+  content: "Item " counter(item) ": ";
+  top: -13px;
+  left: 10px;
+  font-size: 1rem;  
+  color: darkgray;
+  background: white;
+  padding: 2px;
+}
+
+.item input{
+  width: 100%;
+  border: none;
 }
