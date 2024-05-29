@@ -4,91 +4,55 @@
     <h1>Create Tournament</h1>
     <form method="post">
         {% csrf_token %}
-        <div>
-            <label for="id_name">Name:</label>
-            {{ form.name }}
+        {{ form.as_p }}
+        <h2>Players</h2>
+        <div id="player-forms">
+            {{ player_formset.management_form }}
+            {% for form in player_formset %}
+                <div class="player-form">
+                    {{ form.name.label_tag }} {{ form.name }}
+                </div>
+            {% endfor %}
         </div>
-        <div>
-            <label for="id_number_of_players">Number of Players:</label>
-            {{ form.number_of_players }}
+        <h2>Games</h2>
+        <div id="game-forms">
+            {{ game_formset.management_form }}
+            {% for form in game_formset %}
+                <div class="game-form">
+                    {{ form.name.label_tag }} {{ form.name }}
+                </div>
+            {% endfor %}
         </div>
-        <div>
-            <label for="id_number_of_games">Number of Games:</label>
-            {{ form.number_of_games }}
-        </div>
-        <div>
-            <label for="id_format">Format:</label>
-            {{ form.format }}
-        </div>
-        <div id="players_div"></div>
-        <div id="games_div"></div>
-        <button type="submit" onclick="updateInputs()">Create Tournament</button>
+        <button type="button" onclick="updateForms()">Update Fields</button>
+        <button type="submit">Create Tournament</button>
     </form>
-</body>
 
+    <script>
+        function updateForms() {
+            const numPlayers = document.querySelector('#id_number_of_players').value;
+            const numGames = document.querySelector('#id_number_of_games').value;
+            const playerFormsDiv = document.querySelector('#player-forms');
+            const gameFormsDiv = document.querySelector('#game-forms');
+            
+            playerFormsDiv.innerHTML = '{{ player_formset.management_form }}';  // reset
+            gameFormsDiv.innerHTML = '{{ game_formset.management_form }}';  // reset
 
-<!-- <script>
-
-
-[...document.querySelectorAll('.games .qty')]
-  .forEach( qtyEl => {
-    qtyEl.addEventListener('input', (event)=>{
-      const qtyEl = event.target;
-      const qty = event.target.value;
-      clearItems(qtyEl);
-      addItems(qtyEl, qty);
-    });
-  })
-
-
-function clearItems(from){
-  const target = from.closest('.games').querySelector('.items');
-  target.innerHTML = '';
-}
-
-function addItems(from, n){
-  const target = from.closest('.games').querySelector('.items');
-  for(let i = 0; i<n; i++){
-    const new_item = createItem();
-    target.append(new_item);
-  }  
-}
-
-function createItem(){
-  const item = document.createElement('div');  
-  const input = document.createElement('input');  
-  item.classList.add('item');
-  input.classList.add('sub-input');
-  item.append(input);
-  
-  return item;
-}
-</script> -->
-
-<script>
-        function updateInputs() {
-            var numberOfPlayers = document.getElementById('id_number_of_players').value;
-            var numberOfGames = document.getElementById('id_number_of_games').value;
-
-            var playersDiv = document.getElementById('players_div');
-            var gamesDiv = document.getElementById('games_div');
-
-            playersDiv.innerHTML = '';
-            for (var i = 0; i < numberOfPlayers; i++) {
-                playersDiv.innerHTML += '<label for="player_' + (i+1) + '">Player ' + (i+1) + ':</label>';
-                playersDiv.innerHTML += '<input type="text" id="player_' + (i+1) + '" name="player_' + (i+1) + '"><br>';
+            for (let i = 0; i < numPlayers; i++) {
+                playerFormsDiv.innerHTML += `
+                    <div class="player-form">
+                        <label for="id_form-${i}-name">Player Name:</label>
+                        <input type="text" name="form-${i}-name" id="id_form-${i}-name">
+                    </div>`;
             }
 
-            gamesDiv.innerHTML = '';
-            for (var i = 0; i < numberOfGames; i++) {
-                gamesDiv.innerHTML += '<label for="game_' + (i+1) + '">Game ' + (i+1) + ':</label>';
-                gamesDiv.innerHTML += '<input type="text" id="game_' + (i+1) + '" name="game_' + (i+1) + '"><br>';
+            for (let i = 0; i < numGames; i++) {
+                gameFormsDiv.innerHTML += `
+                    <div class="game-form">
+                        <label for="id_form-${i}-name">Game Name:</label>
+                        <input type="text" name="form-${i}-name" id="id_form-${i}-name">
+                    </div>`;
             }
         }
-        document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById('id_number_of_players').addEventListener('change', updateInputs);
-        document.getElementById('id_number_of_games').addEventListener('change', updateInputs);
-        });
     </script>
-
+</body>
 {% endblock %}
