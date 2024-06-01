@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tournament Details</title>
+</head>
+<body>
+    <h1>{{ tournament.name }}</h1>
+    <p>Number of Players: {{ tournament.number_of_players }}</p>
+    <p>Number of Games: {{ tournament.number_of_games }}</p>
+    
+    <p>Format: {{ tournament.get_format_display }}</p>
+</body>
+</html>
